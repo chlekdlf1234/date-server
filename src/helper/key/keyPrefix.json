@@ -1,0 +1,16 @@
+{
+   "user": {
+      "PK": "USER#",
+      "SK": "INFORMATION",
+      "GSI1PK": "USER#",
+      "GSI1SK": "INFORMATION"
+    },
+    "userDailyStatus":{
+        "PK": "USER#",
+        "SK": "STATUS#daily"
+    },
+    "userInformation":{
+        "PK": "USER#",
+        "SK": "INFORMATION"
+    }
+}
