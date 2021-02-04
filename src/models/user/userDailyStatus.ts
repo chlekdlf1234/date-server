@@ -9,6 +9,7 @@ export default (isValidKey: IsValidKey) => ({
   status = 'wait',
   statusStartTime = new Date().toISOString(),
   dailyStudySeconds = 0,
+  period = 'day',
   userId,
 }: IUserDailyStatusModel) => {
   if (!isValidKey({ model: 'userDailyStatus', key: { PK, SK } })) {
@@ -27,6 +28,7 @@ export default (isValidKey: IsValidKey) => ({
     getStatus: () => status,
     getStatusStartTime: () => statusStartTime,
     getDailyStudySecond: () => dailyStudySeconds,
+    getPeriod: () => period,
     getUserId: () => userId,
   });
 };

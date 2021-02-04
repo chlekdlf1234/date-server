@@ -18,6 +18,7 @@ export interface IUserModel extends IBaseModel, IUserAttr {}
 
 export interface IUserDailyStatusAttr {
   status: 'study' | 'pause' | 'wait';
+  period: 'day';
   dailyStudySeconds: number;
   statusStartTime: string;
   userId: string;

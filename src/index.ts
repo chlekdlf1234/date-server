@@ -12,7 +12,9 @@ const main = async () => {
   AWS.config.update(AWSConfig);
 
   const app = express();
+
   app.use(bodyParser.urlencoded({ extended: false }));
+
   app.use('/users', userRouter);
 
   app.listen(4000, () => {

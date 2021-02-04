@@ -24,7 +24,6 @@ export default (addPrefix: AddPrefix) => async ({ userId }: IUserIdParam): Promi
       })
     ).Items![0] as IUserModel;
 
-    console.log(user);
     return user;
   } catch (error) {
     throw new Error(`get user/${error}`);

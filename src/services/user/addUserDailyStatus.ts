@@ -4,16 +4,24 @@ import { AddPrefix } from '../../types/helper';
 import dynamoDB from '../../helper/db/dynamodb';
 import { makeUserDailyStatus } from '../../models/index';
 
-export default (addPrefix: AddPrefix) => async ({ userId, status, dailyStudySeconds, statusStartTime }: IUserDailyStatusAttr): Promise<IUserDailyStatusModel> => {
+export default (addPrefix: AddPrefix) => async ({ userId, status, dailyStudySeconds, statusStartTime, period = 'day' }: IUserDailyStatusAttr): Promise<IUserDailyStatusModel> => {
   try {
     const key = addPrefix({
       model: 'userDailyStatus',
       key: {
         PK: userId,
+        SK: period,
       },
     });
 
-    const userDailyStatus = makeUserDailyStatus({ ...key, userId, status, dailyStudySeconds, statusStartTime });
+    const userDailyStatus = makeUserDailyStatus({
+      ...key,
+      userId,
+      status,
+      dailyStudySeconds,
+      statusStartTime,
+      period,
+    });
 
     const userDailyStatusItem = {
       PK: userDailyStatus.getPK(),
@@ -22,6 +30,7 @@ export default (addPrefix: AddPrefix) => async ({ userId, status, dailyStudySeco
       status: userDailyStatus.getStatus(),
       dailyStudySeconds: userDailyStatus.getDailyStudySecond(),
       statusStartTime: userDailyStatus.getStatusStartTime(),
+      period: userDailyStatus.getPeriod(),
       createdAt: userDailyStatus.getCreatedAt(),
       updatedAt: userDailyStatus.getUpdatedAt(),
     };

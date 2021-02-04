@@ -5,9 +5,9 @@
       "GSI1PK": "USER#",
       "GSI1SK": "INFORMATION"
     },
-    "userDailyStatus":{
+    "userStatus":{
         "PK": "USER#",
-        "SK": "STATUS#DAILY"
+        "SK": "STATUS#"
     },
     "userInformation":{
         "PK": "USER#",

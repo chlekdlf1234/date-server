@@ -16,6 +16,10 @@ export interface IHttpRequest {
 export interface IUserIdParam {
   userId: string;
 }
+export interface IPeriodParam {
+  userId: string;
+  period: string;
+}
 
 export type Controller = (request: IHttpRequest) => Promise<{ [key: string]: string }>;
 export type ServiceFunction<P, R> = (param: P) => Promise<R>;
