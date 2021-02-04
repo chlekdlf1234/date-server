@@ -7,7 +7,7 @@
     },
     "userDailyStatus":{
         "PK": "USER#",
-        "SK": "STATUS#daily"
+        "SK": "STATUS#DAILY"
     },
     "userInformation":{
         "PK": "USER#",

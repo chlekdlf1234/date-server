@@ -1,17 +1,10 @@
-import { IUserModel } from '../../types/model';
+import { IUserAttr, IUserModel } from '../../types/model';
 import { AddPrefix } from '../../types/helper';
 
 import dynamoDB from '../../helper/db/dynamodb';
 import { makeUser } from '../../models/index';
 
-interface IParam {
-  userId: string;
-  name: string;
-  birthday: string;
-  job: string;
-}
-
-export default (addPrefix: AddPrefix) => async ({ userId, name, birthday, job }: IParam): Promise<IUserModel> => {
+export default (addPrefix: AddPrefix) => async ({ userId, name, birthday, job }: IUserAttr): Promise<IUserModel> => {
   try {
     const key = addPrefix({
       model: 'user',

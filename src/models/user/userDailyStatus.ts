@@ -1,17 +1,18 @@
 import { IUserDailyStatusModel } from '../../types/model';
 import { IsValidKey } from '../../types/helper';
 
-export default (isValidKey: IsValidKey) => ({ PK, SK, createdAt = new Date().toISOString(), updatedAt = new Date().toISOString(), status, statusStartTime, dailyStudySeconds, userId }: IUserDailyStatusModel) => {
+export default (isValidKey: IsValidKey) => ({
+  PK,
+  SK,
+  createdAt = new Date().toISOString(),
+  updatedAt = new Date().toISOString(),
+  status = 'wait',
+  statusStartTime = new Date().toISOString(),
+  dailyStudySeconds = 0,
+  userId,
+}: IUserDailyStatusModel) => {
   if (!isValidKey({ model: 'userDailyStatus', key: { PK, SK } })) {
     throw new Error('Data must have a valid prefix.');
-  }
-
-  if (!status) {
-    throw new Error('User daily status must have a status.');
-  }
-
-  if (!statusStartTime) {
-    throw new Error('User daily status must have a status start time.');
   }
 
   if (!userId) {
@@ -19,7 +20,8 @@ export default (isValidKey: IsValidKey) => ({ PK, SK, createdAt = new Date().toI
   }
 
   return Object.freeze({
-    getKeys: () => ({ PK, SK }),
+    getPK: () => PK,
+    getSK: () => SK,
     getCreatedAt: () => createdAt,
     getUpdatedAt: () => updatedAt,
     getStatus: () => status,

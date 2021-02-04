@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { IUserModel } from './model';
 
 export interface ICallbackParam {
   req: Request;
@@ -14,19 +13,9 @@ export interface IHttpRequest {
   path: Request['path'];
 }
 
+export interface IUserIdParam {
+  userId: string;
+}
+
 export type Controller = (request: IHttpRequest) => Promise<{ [key: string]: string }>;
-
-export type AddUser = (param: IAddUserParam) => Promise<IUserModel>;
-
-export type GetUser = (param: IGetUserParam) => Promise<IUserModel>;
-
-interface IAddUserParam {
-  userId: string;
-  name: string;
-  birthday: string;
-  job: string;
-}
-
-interface IGetUserParam {
-  userId: string;
-}
+export type ServiceFunction<P, R> = (param: P) => Promise<R>;

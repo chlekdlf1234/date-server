@@ -13,6 +13,9 @@ export default ({ model, key }: IKeyHelperParam): IReturnKey => {
     const keyPrefixValue = modelKeyObject[indexKey];
 
     if (!targetKey[indexKey]) {
+      if (keyPrefixValue.slice(-1) === '#') {
+        throw new Error(`Need ${indexKey} value`);
+      }
       targetKey[indexKey] = '';
     }
 

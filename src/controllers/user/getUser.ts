@@ -1,7 +1,7 @@
 import { IUserModel } from '../../types/model';
-import { IHttpRequest, GetUser } from '../../types/common';
+import { IHttpRequest, ServiceFunction, IUserIdParam } from '../../types/common';
 
-export default (getUser: GetUser) => async ({ params }: IHttpRequest): Promise<IUserModel> => {
+export default (getUser: ServiceFunction<IUserIdParam, IUserModel>) => async ({ params }: IHttpRequest): Promise<IUserModel> => {
   try {
     const { userId } = params;
 
@@ -9,6 +9,6 @@ export default (getUser: GetUser) => async ({ params }: IHttpRequest): Promise<I
 
     return user;
   } catch (error) {
-    throw new Error(`get user/${error}`);
+    throw new Error(error);
   }
 };

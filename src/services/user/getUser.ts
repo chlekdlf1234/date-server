@@ -1,13 +1,10 @@
 import { IUserModel } from '../../types/model';
 import { AddPrefix } from '../../types/helper';
+import { IUserIdParam } from '../../types/common';
 
 import dynamoDB from '../../helper/db/dynamodb';
 
-interface IParam {
-  userId: string;
-}
-
-export default (addPrefix: AddPrefix) => async ({ userId }: IParam): Promise<IUserModel> => {
+export default (addPrefix: AddPrefix) => async ({ userId }: IUserIdParam): Promise<IUserModel> => {
   try {
     const key = addPrefix({
       model: 'userInformation',
@@ -30,6 +27,6 @@ export default (addPrefix: AddPrefix) => async ({ userId }: IParam): Promise<IUs
     console.log(user);
     return user;
   } catch (error) {
-    throw new Error(`add user/${error}`);
+    throw new Error(`get user/${error}`);
   }
 };

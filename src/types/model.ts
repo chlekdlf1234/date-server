@@ -8,16 +8,19 @@ interface IBaseModel {
   GSI2PK?: string;
 }
 
-export interface IUserModel extends IBaseModel {
+export interface IUserAttr {
   name: string;
   birthday: string;
   job: string;
   userId: string;
 }
+export interface IUserModel extends IBaseModel, IUserAttr {}
 
-export interface IUserDailyStatusModel extends IBaseModel {
+export interface IUserDailyStatusAttr {
   status: 'study' | 'pause' | 'wait';
   dailyStudySeconds: number;
-  statusStartTime: Date;
+  statusStartTime: string;
   userId: string;
 }
+
+export interface IUserDailyStatusModel extends IBaseModel, IUserDailyStatusAttr {}
