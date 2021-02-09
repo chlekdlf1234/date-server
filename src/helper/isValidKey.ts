@@ -1,5 +1,5 @@
 import keyPrefix from './keyPrefix.json';
-import { IKeyHelperParam } from '../../types/helper';
+import { IKeyHelperParam } from '../types/helper';
 
 export default ({ model, key }: IKeyHelperParam): boolean => {
   const modelKeyObject = keyPrefix[model as keyof typeof keyPrefix];

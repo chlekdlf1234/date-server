@@ -1,6 +1,6 @@
 interface IBaseModel {
   PK: string;
-  SK: string;
+  SK?: string;
   createdAt?: string;
   updatedAt?: string;
   GSI1PK?: string;
@@ -8,11 +8,17 @@ interface IBaseModel {
   GSI2PK?: string;
 }
 
+export interface IAuthAttr {
+  email: string;
+  password: string;
+}
+export interface IAuthModel extends IBaseModel, IAuthAttr {}
+
 export interface IUserAttr {
   name: string;
   birthday: string;
   job: string;
-  userId: string;
+  email: string;
 }
 export interface IUserModel extends IBaseModel, IUserAttr {}
 
@@ -21,7 +27,7 @@ export interface IUserDailyStatusAttr {
   period: 'day';
   dailyStudySeconds: number;
   statusStartTime: string;
-  userId: string;
+  email: string;
 }
 
 export interface IUserDailyStatusModel extends IBaseModel, IUserDailyStatusAttr {}

@@ -2,6 +2,7 @@ import { validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 
 import userRules from './rules/user';
+import authRules from './rules/auth';
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
@@ -19,4 +20,4 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export { validate, userRules };
+export { validate, userRules, authRules };

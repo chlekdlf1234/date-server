@@ -1,11 +1,11 @@
 import { IUserModel } from '../../types/model';
-import { IHttpRequest, ServiceFunction, IUserIdParam } from '../../types/common';
+import { IHttpRequest, ServiceFunction, IEmailParam } from '../../types/common';
 
-export default (getUser: ServiceFunction<IUserIdParam, IUserModel>) => async ({ params }: IHttpRequest): Promise<IUserModel> => {
+export default (getUser: ServiceFunction<IEmailParam, IUserModel>) => async ({ params }: IHttpRequest): Promise<IUserModel> => {
   try {
-    const { userId } = params;
+    const { email } = params;
 
-    const user = await getUser({ userId });
+    const user = await getUser({ email });
 
     return user;
   } catch (error) {

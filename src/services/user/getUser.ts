@@ -1,15 +1,15 @@
 import { IUserModel } from '../../types/model';
 import { AddPrefix } from '../../types/helper';
-import { IUserIdParam } from '../../types/common';
+import { IEmailParam } from '../../types/common';
 
-import dynamoDB from '../../helper/db/dynamodb';
+import dynamoDB from '../../helper/dynamodb';
 
-export default (addPrefix: AddPrefix) => async ({ userId }: IUserIdParam): Promise<IUserModel> => {
+export default (addPrefix: AddPrefix) => async ({ email }: IEmailParam): Promise<IUserModel> => {
   try {
     const key = addPrefix({
       model: 'userInformation',
       key: {
-        PK: userId,
+        PK: email,
       },
     });
 

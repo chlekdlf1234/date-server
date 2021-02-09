@@ -3,9 +3,9 @@ import { IHttpRequest, ServiceFunction } from '../../types/common';
 
 export default (addUser: ServiceFunction<IUserAttr, IUserModel>) => async ({ body }: IHttpRequest): Promise<IUserModel> => {
   try {
-    const { userId, job, birthday, name } = body;
+    const { email, job, birthday, name } = body;
 
-    const user = await addUser({ userId, job, birthday, name });
+    const user = await addUser({ email, job, birthday, name });
 
     return user;
   } catch (error) {

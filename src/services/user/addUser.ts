@@ -1,12 +1,12 @@
 import { IUserAttr, IUserModel } from '../../types/model';
 import { AddPrefix } from '../../types/helper';
 
-import dynamoDB from '../../helper/db/dynamodb';
+import dynamoDB from '../../helper/dynamodb';
 import { makeUser } from '../../models/index';
 
 // eslint-disable-next-line
 export default (addPrefix: AddPrefix) => async ({
-  userId,
+  email,
   name,
   birthday,
   job,
@@ -15,12 +15,12 @@ export default (addPrefix: AddPrefix) => async ({
     const key = addPrefix({
       model: 'user',
       key: {
-        PK: userId,
-        GSI1PK: userId,
+        PK: email,
+        GSI1PK: email,
       },
     });
 
-    const user = makeUser({ ...key, name, birthday, job, userId });
+    const user = makeUser({ ...key, name, birthday, job, email });
 
     const userItem = {
       PK: user.getPK(),
@@ -30,7 +30,7 @@ export default (addPrefix: AddPrefix) => async ({
       name: user.getName(),
       birthday: user.getBirthday(),
       job: user.getJob(),
-      userId: user.getUserId(),
+      email: user.getEmail(),
       createdAt: user.getCreatedAt(),
       updatedAt: user.getUpdatedAt(),
     };
@@ -38,6 +38,10 @@ export default (addPrefix: AddPrefix) => async ({
     await dynamoDB.put({
       TableName: process.env.TABLENAME!,
       Item: userItem,
+      ConditionExpression: 'attribute_not_exists(#PK)',
+      ExpressionAttributeNames: {
+        '#PK': 'PK',
+      },
     });
 
     return userItem;

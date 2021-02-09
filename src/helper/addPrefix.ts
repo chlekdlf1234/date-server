@@ -1,5 +1,5 @@
 import keyPrefix from './keyPrefix.json';
-import { IKeyHelperParam, IReturnKey } from '../../types/helper';
+import { IKeyHelperParam, IReturnKey } from '../types/helper';
 
 export default ({ model, key }: IKeyHelperParam): IReturnKey => {
   const modelKeyObject = keyPrefix[model as keyof typeof keyPrefix];

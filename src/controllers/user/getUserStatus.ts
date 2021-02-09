@@ -3,9 +3,9 @@ import { IHttpRequest, IPeriodParam, ServiceFunction } from '../../types/common'
 
 export default (getUserDailyStatus: ServiceFunction<IPeriodParam, IUserDailyStatusModel>) => async ({ params, query }: IHttpRequest): Promise<IUserDailyStatusModel> => {
   try {
-    const { userId } = params;
+    const { email } = params;
 
-    const user = await getUserDailyStatus({ userId, period: query.period as string });
+    const user = await getUserDailyStatus({ email, period: query.period as string });
 
     return user;
   } catch (error) {

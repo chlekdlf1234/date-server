@@ -10,13 +10,13 @@ export default (isValidKey: IsValidKey) => ({
   statusStartTime = new Date().toISOString(),
   dailyStudySeconds = 0,
   period = 'day',
-  userId,
+  email,
 }: IUserDailyStatusModel) => {
   if (!isValidKey({ model: 'userDailyStatus', key: { PK, SK } })) {
     throw new Error('Data must have a valid prefix.');
   }
 
-  if (!userId) {
+  if (!email) {
     throw new Error('User daily status must have a user id');
   }
 
@@ -29,6 +29,6 @@ export default (isValidKey: IsValidKey) => ({
     getStatusStartTime: () => statusStartTime,
     getDailyStudySecond: () => dailyStudySeconds,
     getPeriod: () => period,
-    getUserId: () => userId,
+    getEmail: () => email,
   });
 };

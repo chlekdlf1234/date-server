@@ -1,6 +1,6 @@
 import { DynamoDB } from 'aws-sdk';
 
-const dynamoDB: DynamoDB.DocumentClient = new DynamoDB.DocumentClient({
+const dynamoDB = new DynamoDB.DocumentClient({
   convertEmptyValues: true,
   region: process.env.AWS_REGION,
 });

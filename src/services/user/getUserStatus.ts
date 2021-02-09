@@ -2,19 +2,17 @@ import { IUserDailyStatusModel } from '../../types/model';
 import { AddPrefix } from '../../types/helper';
 import { IPeriodParam } from '../../types/common';
 
-import dynamoDB from '../../helper/db/dynamodb';
+import dynamoDB from '../../helper/dynamodb';
 
-export default (addPrefix: AddPrefix) => async ({ userId, period }: IPeriodParam): Promise<IUserDailyStatusModel> => {
+export default (addPrefix: AddPrefix) => async ({ email, period }: IPeriodParam): Promise<IUserDailyStatusModel> => {
   try {
     const key = addPrefix({
       model: 'userStatus',
       key: {
-        PK: userId,
+        PK: email,
         SK: period,
       },
     });
-
-    console.log(key);
 
     const userStatus = (
       await dynamoDB.query({
@@ -29,7 +27,6 @@ export default (addPrefix: AddPrefix) => async ({ userId, period }: IPeriodParam
 
     return userStatus;
   } catch (error) {
-    console.log(error);
     throw new Error(`get user daily status/${error}`);
   }
 };

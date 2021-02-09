@@ -1,19 +1,27 @@
-import user from '../services/index';
+import { authServices, userServices } from '../services/index';
+
+import makePostAuthUser from './auth/postAuthUser';
 
 import makeGetUser from './user/getUser';
 import makePostUser from './user/postUser';
 
 import makeGetUserStatus from './user/getUserStatus';
 
-const getUser = makeGetUser(user.getUser);
-const postUser = makePostUser(user.addUser);
+const postAuthUser = makePostAuthUser(authServices.addAuthUser);
 
-const getUserStatus = makeGetUserStatus(user.getUserStatus);
+const getUser = makeGetUser(userServices.getUser);
+const postUser = makePostUser(userServices.addUser);
 
-const userServices = Object.freeze({
+const getUserStatus = makeGetUserStatus(userServices.getUserStatus);
+
+const userControllers = Object.freeze({
   getUser,
   postUser,
   getUserStatus,
 });
 
-export default userServices;
+const authControllers = Object.freeze({
+  postAuthUser,
+});
+
+export { userControllers, authControllers };

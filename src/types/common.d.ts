@@ -1,5 +1,13 @@
 import { Request, Response } from 'express';
 
+import { IAuthModel } from './model';
+
+declare global {
+  namespace Express {
+    export interface User extends IAuthModel {}
+  }
+}
+
 export interface ICallbackParam {
   req: Request;
   res: Response;
@@ -11,13 +19,14 @@ export interface IHttpRequest {
   params: Request['params'];
   method: Request['method'];
   path: Request['path'];
+  user?: IAuthModel;
 }
 
-export interface IUserIdParam {
-  userId: string;
+export interface IEmailParam {
+  email: string;
 }
 export interface IPeriodParam {
-  userId: string;
+  email: string;
   period: string;
 }
 

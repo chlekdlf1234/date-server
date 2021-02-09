@@ -10,6 +10,7 @@ export default (controller: Controller) => async (req: Request, res: Response) =
       ip: req.ip,
       method: req.method,
       path: req.path,
+      user: req.user,
     };
 
     const response = await controller(httpRequest);

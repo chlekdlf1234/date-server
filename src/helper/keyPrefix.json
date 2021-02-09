@@ -12,5 +12,8 @@
     "userInformation":{
         "PK": "USER#",
         "SK": "INFORMATION"
+    },
+    "auth":{
+        "PK": "USER#"
     }
 }

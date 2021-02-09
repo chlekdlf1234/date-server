@@ -1,22 +1,22 @@
 import { IUserDailyStatusAttr, IUserDailyStatusModel } from '../../types/model';
 import { AddPrefix } from '../../types/helper';
 
-import dynamoDB from '../../helper/db/dynamodb';
+import dynamoDB from '../../helper/dynamodb';
 import { makeUserDailyStatus } from '../../models/index';
 
-export default (addPrefix: AddPrefix) => async ({ userId, status, dailyStudySeconds, statusStartTime, period = 'day' }: IUserDailyStatusAttr): Promise<IUserDailyStatusModel> => {
+export default (addPrefix: AddPrefix) => async ({ email, status, dailyStudySeconds, statusStartTime, period = 'day' }: IUserDailyStatusAttr): Promise<IUserDailyStatusModel> => {
   try {
     const key = addPrefix({
       model: 'userDailyStatus',
       key: {
-        PK: userId,
+        PK: email,
         SK: period,
       },
     });
 
     const userDailyStatus = makeUserDailyStatus({
       ...key,
-      userId,
+      email,
       status,
       dailyStudySeconds,
       statusStartTime,
@@ -26,7 +26,7 @@ export default (addPrefix: AddPrefix) => async ({ userId, status, dailyStudySeco
     const userDailyStatusItem = {
       PK: userDailyStatus.getPK(),
       SK: userDailyStatus.getSK(),
-      userId: userDailyStatus.getUserId(),
+      email: userDailyStatus.getEmail(),
       status: userDailyStatus.getStatus(),
       dailyStudySeconds: userDailyStatus.getDailyStudySecond(),
       statusStartTime: userDailyStatus.getStatusStartTime(),
@@ -38,6 +38,10 @@ export default (addPrefix: AddPrefix) => async ({ userId, status, dailyStudySeco
     await dynamoDB.put({
       TableName: process.env.TABLENAME!,
       Item: userDailyStatusItem,
+      ConditionExpression: 'attribute_not_exists(#PK)',
+      ExpressionAttributeNames: {
+        '#PK': 'PK',
+      },
     });
 
     return userDailyStatusItem;
