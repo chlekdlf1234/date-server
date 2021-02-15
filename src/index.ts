@@ -1,6 +1,7 @@
 import 'dotenv-safe/config';
 
 import AWS from 'aws-sdk';
+import cors from 'cors';
 import passport from 'passport';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -26,6 +27,14 @@ const main = async () => {
   const redis = new Redis(process.env.REDIS_URL);
 
   app.use(bodyParser.urlencoded({ extended: false }));
+
+  // cors
+  app.use(
+    cors({
+      origin: process.env.CORS_ORIGIN,
+      credentials: true,
+    }),
+  );
 
   // session
   app.use(

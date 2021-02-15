@@ -1,13 +1,14 @@
 import { authServices, userServices } from '../services/index';
 
-import makePostAuthUser from './auth/postAuthUser';
+import makeSignUp from './auth/signUp';
+import signIn from './auth/signIn';
 
 import makeGetUser from './user/getUser';
 import makePostUser from './user/postUser';
 
 import makeGetUserStatus from './user/getUserStatus';
 
-const postAuthUser = makePostAuthUser(authServices.addAuthUser);
+const signUp = makeSignUp(authServices.addAuthUser);
 
 const getUser = makeGetUser(userServices.getUser);
 const postUser = makePostUser(userServices.addUser);
@@ -21,7 +22,8 @@ const userControllers = Object.freeze({
 });
 
 const authControllers = Object.freeze({
-  postAuthUser,
+  signUp,
+  signIn,
 });
 
 export { userControllers, authControllers };
