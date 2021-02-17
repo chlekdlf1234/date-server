@@ -3,7 +3,7 @@ import { IHttpRequest, ServiceFunction, IEmailParam } from '../../types/common';
 
 import deleteKey from '../../helper/deleteKey';
 
-type InvitationInformation = ILinkInvitationModel | ILinkedUserModel;
+type InvitationInformation = ILinkInvitationModel | ILinkedUserModel | undefined;
 type InvitationAttrInformation = ILinkInvitationAttr | ILinkedUserAttr;
 interface IServiceReturn {
   status: string;
