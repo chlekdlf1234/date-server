@@ -17,14 +17,14 @@
         "PK": "USER#"
     },
     "linkInvitation": {
-        "PK": "USER#",
+        "PK": "INVITATION#USER#",
         "SK": "INVITATION#USER#",
         "GSI1PK": "USER#",
         "GSI1SK": "LINK#INFORMATION",
         "GSI2PK": "LINK#"
     },
     "linkInvitation0": {
-        "PK": "USER#",
+        "PK": "INVITATION#USER#",
         "SK": "INVITATION#USER#"
     },
     "linkInvitation1": {

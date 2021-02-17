@@ -29,10 +29,9 @@ export default (addPrefix: AddPrefix) => async ({
       const isExist = (
         await dynamoDB.query({
           TableName: process.env.TABLENAME!,
-          KeyConditionExpression: 'PK = :PK and SK = :SK',
+          KeyConditionExpression: 'PK = :PK',
           ExpressionAttributeValues: {
             ':PK': key.PK,
-            ':SK': key.SK,
           },
         })
       ).Items![0] as ILinkInvitationModel;
@@ -60,9 +59,9 @@ export default (addPrefix: AddPrefix) => async ({
       await dynamoDB.put({
         TableName: process.env.TABLENAME!,
         Item: invitationItem,
-        ConditionExpression: 'attribute_not_exists(#SK)',
+        ConditionExpression: 'attribute_not_exists(#PK)',
         ExpressionAttributeNames: {
-          '#SK': 'SK',
+          '#PK': 'PK',
         },
       });
 
