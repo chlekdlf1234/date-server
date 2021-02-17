@@ -17,7 +17,7 @@ export default (addPrefix: AddPrefix) => async ({
       },
     });
 
-    const authItem = await makeAuth({ ...key, email, password });
+    const authItem = await makeAuth({ ...key, email, password } as IAuthModel);
 
     const authUserItem = {
       PK: authItem.getPK(),
@@ -27,14 +27,18 @@ export default (addPrefix: AddPrefix) => async ({
       updatedAt: authItem.getUpdatedAt(),
     };
 
-    await dynamoDB.put({
-      TableName: process.env.AUTH_TABLENAME!,
-      Item: authUserItem,
-      ConditionExpression: 'attribute_not_exists(#PK)',
-      ExpressionAttributeNames: {
-        '#PK': 'PK',
-      },
-    });
+    try {
+      await dynamoDB.put({
+        TableName: process.env.AUTH_TABLENAME!,
+        Item: authUserItem,
+        ConditionExpression: 'attribute_not_exists(#PK)',
+        ExpressionAttributeNames: {
+          '#PK': 'PK',
+        },
+      });
+    } catch (error) {
+      throw new Error('Email already exist');
+    }
 
     return authUserItem;
   } catch (error) {

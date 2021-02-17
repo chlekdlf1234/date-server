@@ -7,7 +7,7 @@ import dynamoDB from '../../helper/dynamodb';
 export default (addPrefix: AddPrefix) => async ({ email }: IEmailParam): Promise<IUserModel> => {
   try {
     const key = addPrefix({
-      model: 'userInformation',
+      model: 'user0',
       key: {
         PK: email,
       },

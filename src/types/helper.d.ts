@@ -4,7 +4,7 @@ export interface IKeyHelperParam {
 }
 
 export interface IInputKey {
-  PK: string;
+  PK?: string;
   SK?: string;
   GSI1PK?: string;
   GSI1SK?: string;
@@ -12,8 +12,8 @@ export interface IInputKey {
 }
 
 export interface IReturnKey {
-  PK: string;
-  SK: string;
+  PK?: string;
+  SK?: string;
   GSI1PK?: string;
   GSI1SK?: string;
   GSI2PK?: string;

@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import userRules from './rules/user';
 import authRules from './rules/auth';
+import linkRules from './rules/link';
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
@@ -20,4 +21,4 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export { validate, userRules, authRules };
+export { validate, userRules, authRules, linkRules };

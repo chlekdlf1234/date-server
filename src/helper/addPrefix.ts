@@ -2,7 +2,7 @@ import keyPrefix from './keyPrefix.json';
 import { IKeyHelperParam, IReturnKey } from '../types/helper';
 
 export default ({ model, key }: IKeyHelperParam): IReturnKey => {
-  const modelKeyObject = keyPrefix[model as keyof typeof keyPrefix];
+  const modelKeyObject: IReturnKey = keyPrefix[model as keyof typeof keyPrefix];
   const modelKeys: string[] = Object.keys(modelKeyObject);
 
   const targetKey = key;
@@ -13,13 +13,13 @@ export default ({ model, key }: IKeyHelperParam): IReturnKey => {
     const keyPrefixValue = modelKeyObject[indexKey];
 
     if (!targetKey[indexKey]) {
-      if (keyPrefixValue.slice(-1) === '#') {
+      if (keyPrefixValue!.slice(-1) === '#') {
         throw new Error(`Need ${indexKey} value`);
       }
       targetKey[indexKey] = '';
     }
 
-    targetKey[indexKey] = keyPrefixValue.concat(targetKey[indexKey]!);
+    targetKey[indexKey] = keyPrefixValue!.concat(targetKey[indexKey]!);
   }
 
   return targetKey as IReturnKey;

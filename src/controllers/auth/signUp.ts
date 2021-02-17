@@ -1,13 +1,17 @@
 import { IAuthAttr, IAuthModel } from '../../types/model';
 import { IHttpRequest, ServiceFunction } from '../../types/common';
 
-export default (addAuthUser: ServiceFunction<IAuthAttr, IAuthModel>) => async ({ body }: IHttpRequest): Promise<IAuthModel> => {
+interface IReturn {
+  register: boolean;
+}
+
+export default (addAuthUser: ServiceFunction<IAuthAttr, IAuthModel>) => async ({ body }: IHttpRequest): Promise<IReturn> => {
   try {
     const { email, password } = body;
 
-    const user = await addAuthUser({ email, password });
+    await addAuthUser({ email, password });
 
-    return user;
+    return { register: true };
   } catch (error) {
     throw new Error(error);
   }

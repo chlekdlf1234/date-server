@@ -20,7 +20,7 @@ export default (addPrefix: AddPrefix) => async ({
       },
     });
 
-    const user = makeUser({ ...key, name, birthday, job, email });
+    const user = makeUser({ ...key, name, birthday, job, email } as IUserModel);
 
     const userItem = {
       PK: user.getPK(),

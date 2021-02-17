@@ -29,6 +29,15 @@ export interface IPeriodParam {
   email: string;
   period: string;
 }
+export interface ILinkIDParam {
+  linkID: string;
+  email: string;
+}
+export interface IInvitationParam {
+  hostEmail: string;
+  guestEmail: string;
+}
 
 export type Controller = (request: IHttpRequest) => Promise<{ [key: string]: string }>;
+
 export type ServiceFunction<P, R> = (param: P) => Promise<R>;

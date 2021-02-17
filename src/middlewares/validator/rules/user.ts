@@ -8,12 +8,7 @@ const getUserStatus = () => [
   query('period').isIn(['day', 'week', 'month']).withMessage('check period param'),
 ];
 
-const postUser = () => [
-  body('email').isEmail().withMessage('check email param'),
-  body('job').isString().withMessage('check job param'),
-  body('birthday').isNumeric().withMessage('check birthday param'),
-  body('name').isString().withMessage('check name param'),
-];
+const postUser = () => [body('job').isString().withMessage('check job param'), body('birthday').isNumeric().withMessage('check birthday param'), body('name').isString().withMessage('check name param')];
 
 export default Object.freeze({
   getUser,

@@ -6,8 +6,7 @@ const signIn = (req: Request, res: Response, next: NextFunction) => {
     if (user) {
       const signInUser = user;
 
-      delete signInUser.password;
-      return res.status(200).send(signInUser);
+      return req.logIn(signInUser, () => res.status(200).send({ login: true }));
     }
     return res.status(401).send(info);
   })(req, res, next);

@@ -1,13 +1,13 @@
 import { IUserAttr, IUserModel } from '../../types/model';
 import { IHttpRequest, ServiceFunction } from '../../types/common';
 
-export default (addUser: ServiceFunction<IUserAttr, IUserModel>) => async ({ body }: IHttpRequest): Promise<IUserModel> => {
+export default (addUser: ServiceFunction<IUserAttr, IUserModel>) => async ({ user, body }: IHttpRequest): Promise<IUserModel> => {
   try {
-    const { email, job, birthday, name } = body;
+    const { job, birthday, name } = body;
 
-    const user = await addUser({ email, job, birthday, name });
+    const result = await addUser({ email: user!.email, job, birthday, name });
 
-    return user;
+    return result;
   } catch (error) {
     throw new Error(error);
   }

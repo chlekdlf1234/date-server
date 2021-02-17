@@ -31,3 +31,22 @@ export interface IUserDailyStatusAttr {
 }
 
 export interface IUserDailyStatusModel extends IBaseModel, IUserDailyStatusAttr {}
+
+export interface ILinkInvitationAttr {
+  isInvited: boolean;
+  hostEmail: string;
+  guestEmail: string;
+  linkID: string;
+}
+
+export interface ILinkInvitationModel extends IBaseModel, ILinkInvitationAttr {}
+
+export interface ILinkedUserAttr {
+  linkedUserEmail: string;
+  email: string;
+  name: string;
+  birthday: string;
+  linkID: string;
+}
+
+export interface ILinkedUserModel extends IBaseModel, ILinkedUserAttr {}

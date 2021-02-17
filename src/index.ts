@@ -1,6 +1,5 @@
 import 'dotenv-safe/config';
 
-import AWS from 'aws-sdk';
 import cors from 'cors';
 import passport from 'passport';
 import express from 'express';
@@ -10,17 +9,15 @@ import session from 'express-session';
 import Redis from 'ioredis';
 import connectRedis from 'connect-redis';
 
-import AWSConfig from './config/aws';
 import PassportConfig from './config/passport';
 
 import userRouter from './routes/user';
 import authRouter from './routes/auth';
+import linkRouter from './routes/link';
 
 import { PROD, COOKIE_NAME } from './constants';
 
 const main = async () => {
-  AWS.config.update(AWSConfig);
-
   const app = express();
 
   const RedisStore = connectRedis(session);
@@ -65,6 +62,7 @@ const main = async () => {
   // routes
   app.use('/users', userRouter);
   app.use('/auth', authRouter);
+  app.use('/link', linkRouter);
 
   app.listen(process.env.PORT, () => {
     console.log('Server is listening on port 4000');

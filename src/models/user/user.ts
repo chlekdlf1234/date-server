@@ -1,7 +1,7 @@
 import { IUserModel } from '../../types/model';
 import { IsValidKey } from '../../types/helper';
 
-export default (isValidKey: IsValidKey) => ({ PK, SK = 'INFORMATION', GSI1PK, GSI1SK, createdAt = new Date().toISOString(), updatedAt = new Date().toISOString(), name, birthday, job, email }: IUserModel) => {
+export default (isValidKey: IsValidKey) => ({ PK, SK, GSI1PK, GSI1SK, createdAt = new Date().toISOString(), updatedAt = new Date().toISOString(), name, birthday, job, email }: IUserModel) => {
   if (!isValidKey({ model: 'user', key: { PK, SK, GSI1PK, GSI1SK } })) {
     throw new Error('Data must have a valid prefix.');
   }

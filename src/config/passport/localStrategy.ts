@@ -6,7 +6,7 @@ import { authServices } from '../../services/index';
 
 const LocalStrategy = passportLocal.Strategy;
 
-export default () => {
+export default () =>
   passport.use(
     new LocalStrategy(
       {
@@ -15,9 +15,7 @@ export default () => {
       },
       async (email, password, done) => {
         try {
-          // const exUser = await User.findOne({ where: { email } });
           const user = await authServices.getAuthUser({ email });
-
           if (user) {
             const result = await bcrypt.compare(password, user.password);
             if (result) {
@@ -35,4 +33,3 @@ export default () => {
       },
     ),
   );
-};

@@ -7,7 +7,7 @@ import { makeUserDailyStatus } from '../../models/index';
 export default (addPrefix: AddPrefix) => async ({ email, status, dailyStudySeconds, statusStartTime, period = 'day' }: IUserDailyStatusAttr): Promise<IUserDailyStatusModel> => {
   try {
     const key = addPrefix({
-      model: 'userDailyStatus',
+      model: 'userStatus',
       key: {
         PK: email,
         SK: period,
@@ -21,7 +21,7 @@ export default (addPrefix: AddPrefix) => async ({ email, status, dailyStudySecon
       dailyStudySeconds,
       statusStartTime,
       period,
-    });
+    } as IUserDailyStatusModel);
 
     const userDailyStatusItem = {
       PK: userDailyStatus.getPK(),

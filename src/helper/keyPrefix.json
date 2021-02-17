@@ -1,19 +1,44 @@
 {
-   "user": {
-      "PK": "USER#",
-      "SK": "INFORMATION",
-      "GSI1PK": "USER#",
-      "GSI1SK": "INFORMATION"
-    },
-    "userStatus":{
+    "user": {
         "PK": "USER#",
-        "SK": "STATUS#"
+        "SK": "INFORMATION",
+        "GSI1PK": "USER#",
+        "GSI1SK": "INFORMATION"
     },
-    "userInformation":{
+    "user0": {
         "PK": "USER#",
         "SK": "INFORMATION"
     },
-    "auth":{
+    "userStatus": {
+        "PK": "USER#",
+        "SK": "STATUS#"
+    },
+    "auth": {
         "PK": "USER#"
+    },
+    "linkInvitation": {
+        "PK": "USER#",
+        "SK": "INVITATION#USER#",
+        "GSI1PK": "USER#",
+        "GSI1SK": "LINK#INFORMATION",
+        "GSI2PK": "LINK#"
+    },
+    "linkInvitation0": {
+        "PK": "USER#",
+        "SK": "INVITATION#USER#"
+    },
+    "linkInvitation1": {
+        "GSI1PK": "USER#",
+        "GSI1SK": "LINK#INFORMATION"
+    },
+    "linkInvitation2": {
+        "GSI2PK": "LINK#"
+    },
+    "linkedUser": {
+        "PK": "USER#",
+        "SK": "LINKED#USER#",
+        "GSI1PK": "USER#",
+        "GSI1SK": "LINK#INFORMATION",
+        "GSI2PK": "LINK#"
     }
 }
