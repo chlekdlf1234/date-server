@@ -78,8 +78,10 @@ export default (addPrefix: AddPrefix) => async ({
       })
     ).Items! as ILinkInvitationModel[];
 
-    if (invitationItems.length / 2 !== 1) {
+    if (invitationItems.length === 0) {
       throw new Error('Invitation does not exist');
+    } else if (invitationItems.length === 4) {
+      throw new Error('Invitation already accepted');
     }
 
     const guestInvitation = invitationItems.filter((item) => item.isInvited === true)[0];

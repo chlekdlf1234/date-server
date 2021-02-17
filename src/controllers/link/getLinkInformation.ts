@@ -1,18 +1,30 @@
-import { ILinkInvitationModel, ILinkedUserModel } from '../../types/model';
+import { ILinkInvitationModel, ILinkedUserModel, ILinkInvitationAttr, ILinkedUserAttr } from '../../types/model';
 import { IHttpRequest, ServiceFunction, IEmailParam } from '../../types/common';
 
-type InvitationInformation = ILinkInvitationModel | ILinkedUserModel;
+import deleteKey from '../../helper/deleteKey';
 
-interface IReturn {
+type InvitationInformation = ILinkInvitationModel | ILinkedUserModel;
+type InvitationAttrInformation = ILinkInvitationAttr | ILinkedUserAttr;
+interface IServiceReturn {
   status: string;
   linkInformation: InvitationInformation;
 }
+interface IControllerReturn {
+  status: string;
+  linkInformation: InvitationAttrInformation;
+}
 
-export default (getLinkInformation: ServiceFunction<IEmailParam, IReturn>) => async ({ user }: IHttpRequest): Promise<IReturn> => {
+export default (getLinkInformation: ServiceFunction<IEmailParam, IServiceReturn>) => async ({ user }: IHttpRequest): Promise<IControllerReturn> => {
   try {
-    const linkInformation = await getLinkInformation({ email: (user!.email as unknown) as string });
+    const { status, linkInformation } = await getLinkInformation({ email: (user!.email as unknown) as string });
 
-    return linkInformation;
+    let result;
+
+    if (linkInformation) {
+      result = deleteKey(linkInformation);
+    }
+
+    return { status, linkInformation: result as InvitationAttrInformation };
   } catch (error) {
     throw new Error(error);
   }

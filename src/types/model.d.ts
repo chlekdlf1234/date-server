@@ -50,3 +50,7 @@ export interface ILinkedUserAttr {
 }
 
 export interface ILinkedUserModel extends IBaseModel, ILinkedUserAttr {}
+
+export type Models = IAuthModel | IUserModel | IUserDailyStatusModel | ILinkInvitationModel | ILinkedUserModel;
+
+export type Attrs = IAuthAttr | IUserAttr | IUserDailyStatusAttr | ILinkInvitationAttr | ILinkedUserAttr;
